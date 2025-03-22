@@ -1,0 +1,47 @@
+{% extends "accounts/base.html" %}
+
+{% block title %}Product List{% endblock %}
+
+{% block content %}
+<h1>Product List</h1>
+
+<!-- Product List Table -->
+<div class="row mt-4">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Category</th>
+                    <th>Brand</th>
+                    <th>SKU</th>
+                    <th>Stock Quantity</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                {% with product.inventory as inventory %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.category.name }}</td>
+                    <td>{{ inventory.brand.name }}</td>
+                    <td>{{ inventory.sku }}</td>
+                    <td>{{ inventory.stock.units }}</td>
+                    <td>
+                        <a href="{% url 'edit_product' product.id %}" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="{% url 'delete_product' product.id %}" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% endwith %}
+                {% empty %}
+                <tr>
+                    <td colspan="6">No products available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

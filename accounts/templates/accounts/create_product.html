@@ -1,0 +1,127 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    
+    .card-title {
+        font-weight: bold;
+        color: #343a40;
+    }
+    
+    .modal-content {
+        border-radius: 10px;
+    }
+    
+    .modal-header {
+        background-color: #343a40;
+        color: white;
+        border-radius: 10px 10px 0 0;
+    }
+    
+    .modal-footer {
+        border-top: none;
+    }
+    
+    .modal-footer button {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    
+    .modal-footer button:hover {
+        background-color: #4682b4;
+    }
+    
+</style>
+<div class="container mt-5">
+    <h2 class="mb-4">Create Product</h2>
+    
+    <!-- Main Form -->
+    <form method="POST" hx-post="{% url 'create_product' %}" hx-target="#main-form">
+        {% csrf_token %}
+        
+        <div class="row">
+            <!-- Product Details -->
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">Product Details</h5>
+                        {{ product_form.as_p }}
+                        
+                        <!-- Dynamic Category Addition -->
+                        <div class="mb-3">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" 
+                                    data-bs-toggle="modal" data-bs-target="#categoryModal">
+                                + Add Category
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inventory Details -->
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">Inventory Details</h5>
+                        {{ inventory_form.as_p }}
+                        
+                        <!-- Dynamic Brand Addition -->
+                        <div class="mb-3">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" 
+                                    data-bs-toggle="modal" data-bs-target="#brandModal">
+                                + Add Brand
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-4">Save Product</button>
+    </form>
+</div>
+
+<!-- Category Modal -->
+<div class="modal fade" id="categoryModal">
+    <div class="modal-dialog">
+        <form method="POST" hx-post="{% url 'create_product' %}" hx-target="#categoryOptions">
+            {% csrf_token %}
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Category</h5>
+                </div>
+                <div class="modal-body">
+                    {{ category_form.as_p }}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" name="add_category" class="btn btn-primary">Add</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Brand Modal -->
+<div class="modal fade" id="brandModal">
+    <!-- Similar structure to category modal -->
+</div>
+
+<script src="https://unpkg.com/htmx.org@1.8.4"></script>
+<script>
+    document.body.addEventListener('categoryAdded', function(evt) {
+        const categorySelect = document.getElementById('id_category');
+        const newOption = document.createElement('option');
+        newOption.value = evt.detail.id;
+        newOption.text = evt.detail.name;
+        newOption.selected = true;
+        categorySelect.appendChild(newOption);
+    });
+</script>
+
+{% endblock %}

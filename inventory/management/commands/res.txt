@@ -1,0 +1,11 @@
+(env) ye@ye:~/StorH/roh$ python manage.py dbshell
+SQLite version 3.45.1 2024-01-30 16:01:20
+Enter ".help" for usage hints.
+sqlite> DELETE FROM inventory_category;
+sqlite> DELETE FROM inventory_brand;
+sqlite> DELETE FROM inventory_producttype;
+sqlite> DELETE FROM inventory_product;
+sqlite> DELETE FROM inventory_productinventory;
+sqlite> DELETE FROM inventory_specification;
+sqlite> DELETE FROM inventory_stock;
+sqlite> 

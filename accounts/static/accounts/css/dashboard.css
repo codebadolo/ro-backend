@@ -1,0 +1,75 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #2f4f7f; /* Dark blue background */
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: #1a1d23; /* Dark background */
+    color: white;
+}
+
+.navbar .navbar-brand {
+    color: white;
+}
+
+.navbar .nav-link {
+    color: #87ceeb; /* Light blue text */
+}
+
+.navbar .nav-link:hover {
+    color: #4682b4; /* Darker blue on hover */
+}
+
+/* Sidebar Styles */
+.sidebar {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    background-color: #1a1d23; /* Dark background */
+    padding-top: 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    color: #87ceeb; /* Light blue text */
+    text-decoration: none;
+    padding: 10px 20px;
+    display: block;
+}
+
+.sidebar ul li a:hover {
+    background-color: #4682b4; /* Darker blue on hover */
+}
+
+/* Main Content Styles */
+main {
+    margin-left: 250px; /* Matches sidebar width */
+    padding: 20px;
+}
+
+/* Dropdown Menu Styles */
+.dropdown-menu {
+    background-color: #1a1d23; /* Dark background */
+}
+
+.dropdown-menu .dropdown-item {
+    color: #87ceeb; /* Light blue text */
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #4682b4; /* Darker blue on hover */
+}

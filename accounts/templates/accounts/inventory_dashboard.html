@@ -1,0 +1,80 @@
+{% extends "accounts/base.html" %}
+
+{% block title %}Inventory Dashboard{% endblock %}
+
+{% block content %}
+<h1>Inventory Overview</h1>
+
+<!-- Overview Cards -->
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total Products</h5>
+                <p class="card-text">{{ products_count }}</p>
+                <a href="{% url 'product_list' %}" class="btn btn-primary">View Details</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total Stock</h5>
+                <p class="card-text">{{ total_stock }}</p>
+                <a href="#" class="btn btn-primary">View Details</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Low Stock Items</h5>
+                <p class="card-text">{{ low_stock_count }}</p>
+                <a href="#" class="btn btn-primary">View Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Product Stock Levels Chart -->
+<div class="row mt-4">
+    <div class="col-md-12">
+        <h2>Product Stock Levels</h2>
+        <canvas id="stockChart"></canvas>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('stockChart').getContext('2d');
+    const stockChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Product A', 'Product B', 'Product C'],
+            datasets: [{
+                label: 'Stock Levels',
+                data: [100, 50, 200],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+{% endblock %}
